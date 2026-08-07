@@ -75,6 +75,17 @@ robot-control-panel/
 }
 ```
 
+## 🎥 Demo Video
+
+
+
+https://github.com/user-attachments/assets/07bd27ea-7159-4d93-a98b-ea20ef925d67
+
+
+
+
+
+
 ## Screenshots
 
 <img width="647" height="575" alt="control-panel (1)" src="https://github.com/user-attachments/assets/7b92758b-cf5a-4467-9117-0b16e1cde4e6" />
