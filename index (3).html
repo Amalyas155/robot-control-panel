@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Robot Control Panel</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      color: #1f2937;
+      padding: 24px;
+    }
+
+    .card {
+      width: min(100%, 510px);
+      background: #ffffff;
+      border-radius: 22px;
+      padding: 28px;
+      text-align: center;
+      box-shadow: 0 12px 35px rgba(31, 41, 55, 0.12);
+    }
+
+    h1 { margin: 0 0 8px; font-size: 28px; }
+    .intro { margin: 0 0 25px; color: #6b7280; }
+
+    .control-pad {
+      direction: ltr;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 72px);
+      gap: 13px;
+      margin: 0 auto 28px;
+      max-width: 380px;
+    }
+
+    .control-btn {
+      border: 2px solid #d8dee9;
+      border-radius: 16px;
+      background: #ffffff;
+      color: #1f2937;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+
+    .control-btn:hover {
+      background: #eef4ff;
+      border-color: #6d5dfc;
+      transform: translateY(-2px);
+    }
+
+    .forward { grid-column: 2; grid-row: 1; }
+    .left { grid-column: 1; grid-row: 2; }
+    .stop { grid-column: 2; grid-row: 2; border-color: #ef4444; color: #dc2626; }
+    .right { grid-column: 3; grid-row: 2; }
+    .backward { grid-column: 2; grid-row: 3; }
+
+    .voice-box { border-top: 1px solid #e5e7eb; padding-top: 22px; }
+    h2 { font-size: 19px; margin: 0 0 14px; }
+
+    select, .mic-btn {
+      width: 100%;
+      border-radius: 12px;
+      font-size: 16px;
+    }
+
+    select {
+      padding: 12px;
+      border: 1px solid #d8dee9;
+      margin-bottom: 12px;
+      background: #fff;
+    }
+
+    .mic-btn {
+      border: 0;
+      padding: 14px;
+      background: #6d5dfc;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .mic-btn:hover { background: #5949ec; }
+    .mic-btn:disabled { background: #9ca3af; cursor: not-allowed; }
+
+    .transcript, .status {
+      border-radius: 12px;
+      padding: 12px;
+      margin: 14px 0 0;
+      word-break: break-word;
+    }
+
+    .transcript { background: #f3f4f6; color: #374151; }
+    .status { background: #eef4ff; color: #334155; }
+    .status.success { background: #dcfce7; color: #166534; }
+    .status.error { background: #fee2e2; color: #b91c1c; }
+  </style>
+</head>
+
+<body>
+  <main class="card">
+    <h1>لوحة تحكم الروبوت 🤖</h1>
+    <p class="intro">استخدمي الأزرار أو المايك لإرسال أمر الحركة.</p>
+
+    <div class="control-pad">
+      <button class="control-btn forward" type="button" onclick="sendCommand('forward', 'forward')">↑ Forward</button>
+      <button class="control-btn left" type="button" onclick="sendCommand('left', 'left')">← Left</button>
+      <button class="control-btn stop" type="button" onclick="sendCommand('stop', 'stop')">■ Stop</button>
+      <button class="control-btn right" type="button" onclick="sendCommand('right', 'right')">Right →</button>
+      <button class="control-btn backward" type="button" onclick="sendCommand('backward', 'backward')">↓ Backward</button>
+    </div>
+
+    <section class="voice-box">
+      <h2>التحكم الصوتي 🎤</h2>
+
+      <select id="language">
+        <option value="en-US">English — قولي: forward / left / stop</option>
+        <option value="ar-SA">العربية — قولي: أمام / يسار / توقف</option>
+      </select>
+
+      <button id="micBtn" class="mic-btn" type="button">🎤 اضغطي وتكلمي</button>
+      <p id="transcript" class="transcript">النص المنطوق سيظهر هنا.</p>
+    </section>
+
+    <p id="status" class="status">جاهز لإرسال الأوامر.</p>
+  </main>
+
+  <script>
+    const statusBox = document.getElementById("status");
+    const transcriptBox = document.getElementById("transcript");
+    const micBtn = document.getElementById("micBtn");
+    const languageSelect = document.getElementById("language");
+
+    function setStatus(message, type = "") {
+      statusBox.textContent = message;
+      statusBox.className = "status " + type;
+    }
+
+    async function sendCommand(command, voiceText) {
+      setStatus("جاري حفظ الأمر...");
+
+      const formData = new URLSearchParams();
+      formData.append("command", command);
+      formData.append("voice_text", voiceText);
+
+      try {
+        const response = await fetch("update_command.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: formData.toString()
+        });
+
+        const data = await response.json();
+
+        if (data.status !== "success") {
+          throw new Error(data.message || "حدث خطأ غير معروف");
+        }
+
+        if (data.recognized) {
+          setStatus(`تم الحفظ: ${data.voice_text} ← الأمر المخزن هو "${data.stored_as}"`, "success");
+        } else {
+          setStatus(`تم حفظ النص: "${data.voice_text}"، لكنه ليس أمر حركة معروفًا.`, "success");
+        }
+      } catch (error) {
+        setStatus("فشل الاتصال بالسيرفر أو قاعدة البيانات.", "error");
+      }
+    }
+
+    function normalizeText(text) {
+      return text
+        .toLowerCase()
+        .replace(/[أإآ]/g, "ا")
+        .replace(/ى/g, "ي")
+        .replace(/ة/g, "ه")
+        .replace(/[ًٌٍَُِّْ]/g, "")
+        .trim();
+    }
+
+    function detectCommand(text) {
+      const spoken = normalizeText(text);
+
+      const commands = {
+        forward: ["forward", "go forward", "move forward", "امام", "للامام", "قدام"],
+        backward: ["backward", "go back", "back", "خلف", "للخلف", "ارجع", "وراء"],
+        left: ["left", "go left", "يسار", "علي اليسار"],
+        right: ["right", "go right", "يمين", "علي اليمين"],
+        stop: ["stop", "halt", "توقف", "قف", "وقف", "اوقف"]
+      };
+
+      for (const command in commands) {
+        if (commands[command].some(word => spoken.includes(word))) {
+          return command;
+        }
+      }
+
+      return "";
+    }
+
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+      micBtn.disabled = true;
+      setStatus("متصفحك لا يدعم التعرف على الصوت. استخدمي Google Chrome.", "error");
+    } else {
+      const recognition = new SpeechRecognition();
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+
+      micBtn.addEventListener("click", () => {
+        recognition.lang = languageSelect.value;
+        recognition.start();
+      });
+
+      recognition.onstart = () => {
+        micBtn.textContent = "🎙️ أسمعك الآن...";
+        micBtn.disabled = true;
+        setStatus("تكلمي الآن.");
+      };
+
+      recognition.onresult = (event) => {
+        const spokenText = event.results[0][0].transcript;
+        transcriptBox.textContent = "النص المنطوق: " + spokenText;
+        sendCommand(detectCommand(spokenText), spokenText);
+      };
+
+      recognition.onerror = (event) => {
+        let message = "تعذر تشغيل المايك.";
+
+        if (event.error === "not-allowed") {
+          message = "اسمحي للمتصفح باستخدام المايك ثم حاولي مرة أخرى.";
+        } else if (event.error === "no-speech") {
+          message = "لم يتم سماع كلام. حاولي مرة أخرى.";
+        }
+
+        setStatus(message, "error");
+      };
+
+      recognition.onend = () => {
+        micBtn.textContent = "🎤 اضغطي وتكلمي";
+        micBtn.disabled = false;
+      };
+    }
+  </script>
+</body>
+</html>
