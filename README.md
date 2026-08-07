@@ -55,7 +55,7 @@ robot-control-panel/
 5. Upload `index.html`, `db.php`, `update_command.php`, and `get_state.php` to the `htdocs` folder.
 6. Open `index.html` in Google Chrome and allow microphone access.
 
-> **Security note:** Do not upload the real `db.php` file to GitHub because it contains your MySQL password. Upload `db.example.php` instead.
+
 
 ## How It Works
 
@@ -77,7 +77,11 @@ robot-control-panel/
 
 ## Screenshots
 
-Add your two project screenshots to the repository after uploading it:
+<img width="482" height="568" alt="Screenshot 2026-08-07 211041" src="https://github.com/user-attachments/assets/ed333b9b-f7f3-46d8-8876-d8cce0c69606" />
+
+<img width="676" height="371" alt="Screenshot 2026-08-07 211025" src="https://github.com/user-attachments/assets/a694da96-11d8-4a53-9f48-0daf73fb8650" />
+
+
 
 - Control panel with a recognized voice command.
 - phpMyAdmin showing `voice_text` and `command` values.
