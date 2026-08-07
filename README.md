@@ -88,10 +88,9 @@ https://github.com/user-attachments/assets/07bd27ea-7159-4d93-a98b-ea20ef925d67
 ## Screenshots
 
 <p align="center">
-  <img src="./assets/control-panel.png" alt="Robot Control Panel" width="48%" />
-  <img src="./assets/database-output.png" alt="Database Output" width="48%" />
+  <img src="./control-panel.png" alt="Robot Control Panel" width="48%" />
+  <img src="./database-output.png" alt="Database Output" width="48%" />
 </p>
-
 
 
 
