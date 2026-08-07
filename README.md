@@ -85,11 +85,12 @@ https://github.com/user-attachments/assets/07bd27ea-7159-4d93-a98b-ea20ef925d67
 
 
 
-
 ## Screenshots
 
-<img width="647" height="575" alt="control-panel (1)" src="https://github.com/user-attachments/assets/7b92758b-cf5a-4467-9117-0b16e1cde4e6" />
-<img width="676" height="371" alt="database-output" src="https://github.com/user-attachments/assets/c6a69eb6-01ed-4723-9bc0-36b341184570" />
+<p align="center">
+  <img src="./assets/control-panel.png" alt="Robot Control Panel" width="48%" />
+  <img src="./assets/database-output.png" alt="Database Output" width="48%" />
+</p>
 
 
 
