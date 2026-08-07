@@ -1,4 +1,4 @@
-# Robot Control Panel with Voice Commands ðŸ¤–
+# Robot Control Panel with Voice Commands 🤖
 
 A web-based control panel for sending robot movement commands through buttons or voice recognition. The recognized speech and the movement command are saved in a MySQL database.
 
@@ -38,12 +38,12 @@ A web-based control panel for sending robot movement commands through buttons or
 
 ```text
 robot-control-panel/
-â”œâ”€â”€ index.html             # Control panel and voice recognition interface
-â”œâ”€â”€ update_command.php     # Saves commands and voice text in MySQL
-â”œâ”€â”€ get_state.php          # Returns the latest robot state as JSON
-â”œâ”€â”€ db.example.php          # Safe database connection template
-â”œâ”€â”€ setup.sql              # Creates the database table
-â””â”€â”€ .gitignore             # Prevents real database credentials from being uploaded
+├── index.html             # Control panel and voice recognition interface
+├── update_command.php     # Saves commands and voice text in MySQL
+├── get_state.php          # Returns the latest robot state as JSON
+├── db.example.php          # Safe database connection template
+├── setup.sql              # Creates the database table
+└── .gitignore             # Prevents real database credentials from being uploaded
 ```
 
 ## Setup
