@@ -79,19 +79,24 @@ robot-control-panel/
 
 
 
-https://github.com/user-attachments/assets/07bd27ea-7159-4d93-a98b-ea20ef925d67
 
+https://github.com/user-attachments/assets/e618c52f-b16f-46ac-ac16-a80338a364a6
 
 
 
 
 ## Screenshots
 
-<p align="center">
-  <img src="./control-panel.png" alt="Robot Control Panel" width="48%" />
-  <img src="./database-output.png" alt="Database Output" width="48%" />
-</p>
-
+<table>
+  <tr>
+    <td width="50%">
+      <img src="./image(20260807-180914).png" width="100%" />
+    </td>
+    <td width="50%">
+      <img src="./image(20260807-181034).png" width="100%" />
+    </td>
+  </tr>
+</table>
 
 
 - Control panel with a recognized voice command.
