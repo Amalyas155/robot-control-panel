@@ -77,9 +77,9 @@ robot-control-panel/
 
 ## Screenshots
 
-<img width="482" height="568" alt="Screenshot 2026-08-07 211041" src="https://github.com/user-attachments/assets/ed333b9b-f7f3-46d8-8876-d8cce0c69606" />
+<img width="647" height="575" alt="control-panel (1)" src="https://github.com/user-attachments/assets/7b92758b-cf5a-4467-9117-0b16e1cde4e6" />
+<img width="676" height="371" alt="database-output" src="https://github.com/user-attachments/assets/c6a69eb6-01ed-4723-9bc0-36b341184570" />
 
-<img width="676" height="371" alt="Screenshot 2026-08-07 211025" src="https://github.com/user-attachments/assets/a694da96-11d8-4a53-9f48-0daf73fb8650" />
 
 
 
