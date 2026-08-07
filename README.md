@@ -87,9 +87,12 @@ https://github.com/user-attachments/assets/e618c52f-b16f-46ac-ac16-a80338a364a6
 
 ## Screenshots
 
-![Robot Control Panel](./assets/control-panel.png)
+<img width="647" height="575" alt="control-panel (1)" src="https://github.com/user-attachments/assets/3037db9d-77fe-4834-9b6f-8e21b9a73402" />
 
-![Database Output](./assets/database-output.png)
+<img width="676" height="371" alt="database-output" src="https://github.com/user-attachments/assets/b02aa1c4-dd6e-44cf-af78-15f371a383d3" />
+
+
+
 
 
 - Control panel with a recognized voice command.
