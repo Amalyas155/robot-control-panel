@@ -87,16 +87,9 @@ https://github.com/user-attachments/assets/e618c52f-b16f-46ac-ac16-a80338a364a6
 
 ## Screenshots
 
-<table>
-  <tr>
-    <td width="50%">
-      <img src="./image(20260807-180914).png" width="100%" />
-    </td>
-    <td width="50%">
-      <img src="./image(20260807-181034).png" width="100%" />
-    </td>
-  </tr>
-</table>
+![Robot Control Panel](./assets/control-panel.png)
+
+![Database Output](./assets/database-output.png)
 
 
 - Control panel with a recognized voice command.
